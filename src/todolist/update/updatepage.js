@@ -1,19 +1,25 @@
-import { Carddiscription, Cardtitle, Createcard, Createcontainer, Createinnerwrapper, Createsection, Createwrapper} from "../create/create.styled"
-import { Addbutton, Cardbutton } from "../home/Card.styled";
-import React, { useState,useEffect } from "react";
-import { Link, useNavigate,useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import {
+  Carddiscription,
+  Cardtitle,
+  Createcard,
+  Createcontainer,
+  Createinnerwrapper,
+  Createsection,
+  Createwrapper,
+} from "../create/create.styled";
+import { DefaultButton, Globalbutton } from "../buttons/buttons.styled";
 
-export function Updatepage () {
-
-    const { id } = useParams();
-
+export function Updatepage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const [value, setValue] = useState({
     Title: "",
-        Discription: "",
+    Discription: "",
   });
-
 
   useEffect(() => {
     axios
@@ -22,44 +28,47 @@ export function Updatepage () {
       .catch((err) => console.log(err));
   }, [id]);
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .put(`http://localhost:2000/users/${id}`, value)
       .then((res) => {
         console.log("Update successful:", res.data);
+        // Navigate to the home page after successful update
+        navigate("/");
       })
       .catch((err) => console.log("Update failed:", err));
   };
 
-    return (
-        <>
-            <Createsection>
-            <Createcontainer>
-               <Createwrapper>
-                <Createinnerwrapper>
-                  <Createcard>
-                  <Cardtitle   type="text"
-                
+  return (
+    <>
+      <Createsection>
+        <Createcontainer>
+          <Createwrapper>
+            <Createinnerwrapper>
+              <Createcard>
+                <Cardtitle
+                  type="text"
                   value={value.Title}
-                  onChange={(e) => setValue({ ...value, Title: e.target.value })} ></Cardtitle>
+                  onChange={(e) =>
+                    setValue({ ...value, Title: e.target.value })
+                  }
+                ></Cardtitle>
 
-                    <Carddiscription  
-                    type="text"
-                
+                <Carddiscription
+                  type="text"
                   value={value.Discription}
-                  onChange={(e) => setValue({ ...value, Discription: e.target.value })}
-                    > 
-                
-                    </Carddiscription>
-                    <Cardbutton onClick={handleSubmit}>submit</Cardbutton>
-                    <Addbutton to={"/"}>back</Addbutton>
-                  </Createcard>  
-                </Createinnerwrapper>
-               </Createwrapper> 
-            </Createcontainer>
-           </Createsection>
-        </>
-    )
+                  onChange={(e) =>
+                    setValue({ ...value, Discription: e.target.value })
+                  }
+                ></Carddiscription>
+                <DefaultButton onClick={handleSubmit}>submit</DefaultButton>
+                <Globalbutton to={"/"}>back</Globalbutton>
+              </Createcard>
+            </Createinnerwrapper>
+          </Createwrapper>
+        </Createcontainer>
+      </Createsection>
+    </>
+  );
 }

@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
 export const Homesection = styled.div`
-  background-image: url(https://i.pinimg.com/originals/ab/68/fa/ab68fa9b92338fed03b0431754e8112f.gif);
+  background-image: url(https://i.pinimg.com/originals/3c/53/12/3c5312c107ff15d1f1459218ecbe76bc.gif);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  min-height: 777px;
   height: 100%;
+  width: 100%;
+  
 `;
 export const Homecontainer = styled.div`
   width: 100%;
@@ -32,7 +35,7 @@ export const Leftbox = styled.div`
 `;
 export const Rightbox = styled.div`
   width: 100%;
-  max-width: 70%;
+  max-width: 100%;
   padding: 12px;
 `;
 export const Homeheading = styled.div`
